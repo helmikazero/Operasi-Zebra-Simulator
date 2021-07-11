@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: 6f7dede6bf0d15d429b2032ae2ee5dfb
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - Futura Lt BT
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 4ac76862f759a7d4d8b2a87a9c3b8390, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
