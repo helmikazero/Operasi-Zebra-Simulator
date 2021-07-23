@@ -5,31 +5,46 @@ using UnityEngine.UI;
 
 public class DriverSet : MonoBehaviour
 {
+    public class WarnaMotor
+    {
+        public Text warnaText;
+        public Material warnaMat;
+    }
+
+    public WarnaMotor[] warna;
+
+
     [System.Serializable]
     public class DriverProperties
     {
         public bool isAman;
 
         [Header("SIM C")]
-        public string sim_nama = "HARI MONOLO";
-        public Sprite sim_foto;
+        /*public string sim_nama = "HARI MONOLO";
         public string sim_ttl = "BANDUNG, 16-01-1987";
         public string sim_bgen = "O - PRIA";
         public string sim_alamat = "JL. KADAL RT 14/93 KELURAHAN, KECEMATAN, BANDUNG";
         public string sim_pekerjaan = "MAHASISWA";
+        public int[] sim_kadaluarsa = new int[3] { 31, 7, 2021 };*/
+        public string[] sim_textDetail = new string[5] { "HARI MONOLO", "BANDUNG, 16-01-1987", "O - PRIA", "JL. KADAL RT 14/93 KELURAHAN, KECEMATAN, BANDUNG", "MAHASISWA" };
+        public Sprite sim_foto;
         public int[] sim_kadaluarsa = new int[3] { 31, 7, 2021 };
 
+
         [Header("STNK")]
-        public string stnk_noplat = "D 4912 GX";
+        /*public string stnk_noplat = "D 4912 GX";
         public string stnk_nama = "HARI MONOLO";
         public string stnk_alamat = "JL. KADAL RT 14/93 KELURAHAN, KECEMATAN, BANDUNG";
         public string stnk_merk = "HANDO";
         public string stnk_jenis = "SEPEDA MOTOR";
-        public int stnk_tahunpembuatan = 2017;
         public string stnk_cc = "00150 CC";
         public string stnk_rangka = "MH1KC82193184";
-        public string stnk_mesin = "KC82E123455";
-        public string stnk_warna = "MERAH";
+        public string stnk_mesin = "KC82E123455";*/
+        
+
+        public string[] stnk_textDetail = new string[8] { "D 4912 GX", "HARI MONOLO", "JL. KADAL RT 14/93 KELURAHAN, KECEMATAN, BANDUNG", "HANDO", "SEPEDA MOTOR", "00150 CC", "MH1KC82193184", "KC82E123455" };
+        public int stnk_warnaIndex = 0;
+        public int stnk_tahunpembuatan = 2017;
         public int[] stnk_kadaluarsa = new int[3] { 31, 7, 2021 };
 
         [Header("MOTOR PROPS")]
@@ -91,13 +106,13 @@ public class DriverSet : MonoBehaviour
 
     public void ApplytoWorld()
     {
-        wsim_nama.text = drivers[driverIndex].sim_nama;
+        /*wsim_nama.text = drivers[driverIndex].sim_nama;
         wsim_foto.sprite = drivers[driverIndex].sim_foto;
         wsim_ttl.text = drivers[driverIndex].sim_ttl;
         wsim_bgen.text = drivers[driverIndex].sim_bgen;
         wsim_alamat.text = drivers[driverIndex].sim_alamat;
         wsim_pekerjaan.text = drivers[driverIndex].sim_pekerjaan;
-        wsim_kadaluarsa.text = drivers[driverIndex].sim_kadaluarsa[0] + "-" + drivers[driverIndex].sim_kadaluarsa[1] + "-" + drivers[driverIndex].sim_kadaluarsa[2];
+        wsim_kadaluarsa.text = drivers[driverIndex].sim_kadaluarsa[0] + "-" + drivers[driverIndex].sim_kadaluarsa[1] + "-" + drivers[driverIndex].sim_kadaluarsa[2];*/
 
 
 
