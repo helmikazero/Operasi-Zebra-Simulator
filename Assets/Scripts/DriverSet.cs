@@ -5,6 +5,16 @@ using UnityEngine.UI;
 
 public class DriverSet : MonoBehaviour
 {
+
+    public int driverIndex;
+
+    public GameObject driverOb;
+    public int statein;
+    public Transform[] statepos = new Transform[3];
+
+    public int rightAnswer;
+
+
     [System.Serializable]
     public class WarnaMotor
     {
@@ -23,6 +33,7 @@ public class DriverSet : MonoBehaviour
         public GameObject modelparent;
     }
 
+   
     public ModelMotor[] motor;
 
 
@@ -65,9 +76,10 @@ public class DriverSet : MonoBehaviour
         public bool motor_lampubelakang = true;
     }
 
+    public DriverProperties currentDriver;
     public DriverProperties[] drivers;
 
-    public int driverIndex;
+    
 
     public Text wsim_nama;
     public Image wsim_foto;
@@ -112,7 +124,7 @@ public class DriverSet : MonoBehaviour
 
     public void ApplytoWorld()
     {
-        wsim_nama.text = drivers[driverIndex].sim_nama;
+        wsim_nama.text = currentDriver.sim_nama;
         wsim_foto.sprite = drivers[driverIndex].sim_foto;
         wsim_ttl.text = drivers[driverIndex].sim_ttl;
         wsim_bgen.text = drivers[driverIndex].sim_bgen;
@@ -143,7 +155,45 @@ public class DriverSet : MonoBehaviour
         wmotor_spion[wmotor_modelIndex].SetActive(drivers[driverIndex].motor_spion);
         wmotor_lampudepan[wmotor_modelIndex].SetActive(drivers[driverIndex].motor_lampudepan);
         wmotor_lampubelakang[wmotor_modelIndex].SetActive(drivers[driverIndex].motor_lampubelakang);
+    }
 
+    /*public void ApplytoWorld()
+    {
+        wsim_nama.text = drivers[driverIndex].sim_nama;
+        wsim_foto.sprite = drivers[driverIndex].sim_foto;
+        wsim_ttl.text = drivers[driverIndex].sim_ttl;
+        wsim_bgen.text = drivers[driverIndex].sim_bgen;
+        wsim_alamat.text = drivers[driverIndex].sim_alamat;
+        wsim_pekerjaan.text = drivers[driverIndex].sim_pekerjaan;
+        wsim_kadaluarsa.text = drivers[driverIndex].sim_kadaluarsa[0] + "-" + drivers[driverIndex].sim_kadaluarsa[1] + "-" + drivers[driverIndex].sim_kadaluarsa[2];
 
+        wstnk_noplat.text = drivers[driverIndex].stnk_noplat;
+        wstnk_nama.text = drivers[driverIndex].stnk_nama;
+        wstnk_alamat.text = drivers[driverIndex].stnk_alamat;
+        wstnk_merk.text = motor[drivers[driverIndex].stnk_modelIndex].modelText;
+        wstnk_jenis.text = drivers[driverIndex].stnk_jenis;
+        wstnk_tahunpembuatan.text = drivers[driverIndex].stnk_tahunpembuatan.ToString();
+        wstnk_cc.text = drivers[driverIndex].stnk_cc;
+        wstnk_rangka.text = drivers[driverIndex].stnk_rangka;
+        wstnk_mesin.text = drivers[driverIndex].stnk_mesin;
+        wstnk_warna.text = warna[drivers[driverIndex].stnk_warnaIndex].warnaText;
+        wstnk_kadaluarsa.text = drivers[driverIndex].stnk_kadaluarsa.ToString();
+
+        foreach (ModelMotor mot in motor)
+        {
+            mot.modelparent.SetActive(false);
+        }
+
+        motor[wmotor_modelIndex].modelparent.SetActive(true);
+        wmotor_noplat[wmotor_modelIndex].text = drivers[driverIndex].motor_noplat;
+        wmotor_mesin[wmotor_modelIndex].text = drivers[driverIndex].motor_mesin;
+        wmotor_spion[wmotor_modelIndex].SetActive(drivers[driverIndex].motor_spion);
+        wmotor_lampudepan[wmotor_modelIndex].SetActive(drivers[driverIndex].motor_lampudepan);
+        wmotor_lampubelakang[wmotor_modelIndex].SetActive(drivers[driverIndex].motor_lampubelakang);
+    }*/
+
+    public void PlayerAnswer(bool answerBool)
+    {
+        /*if(answerBool) = */
     }
 }
