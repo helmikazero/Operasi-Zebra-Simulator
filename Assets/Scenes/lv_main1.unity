@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: 1472c5b1cdbb98046bf0b9d37e132268, type: 2}
   m_LightingSettings: {fileID: 4890085278179872738, guid: 477cc4148fad3449482a3bc3178594e2, type: 2}
 --- !u!196 &4
 NavMeshSettings:
@@ -575,7 +575,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 25
+  m_RootOrder: 24
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &532141178
 PrefabInstance:
@@ -884,35 +884,81 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nameList:
-  - Andi
-  - Bramanto
-  - Chaira
-  - Denanto
-  - Endang
-  - Farhan
-  - Galih
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  fotoList: []
-  kotaList: []
-  golDarahList: []
-  genderList: []
-  pekerjaanList: []
-  platKotaList: []
-  platDaerahList: []
-  alfabet: []
+  - ANDI
+  - BRAMANTO
+  - CHAIRA
+  - DENANTO
+  - ENDANG
+  - FARHAN
+  - GALIH
+  - HELMI
+  - INDRAJIT
+  - JOKO
+  - LENDRO
+  - AMMAR
+  - HENDRO
+  - BUDIONO
+  - NOVIAN
+  - ZAKY
+  - AREZA
+  - ABELARD
+  - HASAN
+  - ULWAN
+  - RASYID
+  fotoList:
+  - {fileID: 0}
+  kotaList:
+  - KOTA SEMARANG
+  - KOTA BANDUNG
+  - KOTA SURABAYA
+  golDarahList:
+  - A
+  - B
+  - AB
+  - O
+  genderList:
+  - PRIA
+  - PEREMPUAN
+  pekerjaanList:
+  - PELAJAR
+  - PNS
+  - SWASTA
+  platKotaList:
+  - D
+  - H
+  - L
+  platDaerahList:
+  - AD
+  - BC
+  - KH
+  - ZH
+  - CE
+  alfabet:
+  - A
+  - B
+  - C
+  - D
+  - E
+  - F
+  - G
+  - H
+  - I
+  - J
+  - K
+  - L
+  - M
+  - N
+  - O
+  - P
+  - Q
+  - R
+  - S
+  - T
+  - U
+  - V
+  - W
+  - X
+  - Z
 --- !u!4 &688238252
 Transform:
   m_ObjectHideFlags: 0
@@ -925,7 +971,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 24
+  m_RootOrder: 23
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &839228510
 PrefabInstance:
@@ -2430,75 +2476,6 @@ ReflectionProbe:
   m_UseOcclusionCulling: 1
   m_Importance: 1
   m_CustomBakedTexture: {fileID: 0}
---- !u!1 &1967409607
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1967409609}
-  - component: {fileID: 1967409608}
-  m_Layer: 0
-  m_Name: asa
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1967409608
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1967409607}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3409e319a918ed84aa81dfdd3b7a60ef, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isAman: 0
-  sim_nama: HARI MONOLO
-  sim_foto: {fileID: 0}
-  sim_ttl: BANDUNG, 16-01-1987
-  sim_bgen: O - PRIA
-  sim_alamat: JL. KADAL RT 14/93 KELURAHAN, KECEMATAN, BANDUNG
-  sim_pekerjaan: MAHASISWA
-  sim_kadaluarsa: 1f00000007000000e5070000
-  stnk_noplat: D 4912 GX
-  stnk_nama: HARI MONOLO
-  stnk_alamat: JL. KADAL RT 14/93 KELURAHAN, KECEMATAN, BANDUNG
-  stnk_merk: HANDO
-  stnk_jenis: SEPEDA MOTOR
-  stnk_tahunpembuatan: 2017
-  stnk_cc: 00150 CC
-  stnk_rangka: MH1KC82193184
-  stnk_mesin: KC82E123455
-  stnk_warna: MERAH
-  stnk_kadaluarsa: 1f00000007000000e5070000
-  motor_noplat: D 4912 GX
-  motor_matindex: 0
-  motor_model: 0
-  motor_mesin: KC82E123455
-  motor_spion: 1
-  motor_lampudepan: 1
-  motor_lampubelakang: 1
---- !u!4 &1967409609
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1967409607}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 39.274826, y: -26.040941, z: -21.631138}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 23
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2057121160
 PrefabInstance:
   m_ObjectHideFlags: 0

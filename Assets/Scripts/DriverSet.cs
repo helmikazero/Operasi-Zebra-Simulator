@@ -225,9 +225,7 @@ public class DriverSet : MonoBehaviour
 
     public DriverProperties GenerateNewDriver()
     {
-
         DriverProperties newDriver = null;
-
 
         newDriver.sim_nama = bdd.nameList[Random.Range(0, bdd.nameList.Length)] + " " + bdd.nameList[Random.Range(0, bdd.nameList.Length)];
         newDriver.sim_foto = bdd.fotoList[Random.Range(0, bdd.fotoList.Length)];
