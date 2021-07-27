@@ -461,6 +461,122 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f097dc9a3df5e3f438a719706f0be90a, type: 3}
+--- !u!1 &500750238
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 500750240}
+  - component: {fileID: 500750239}
+  m_Layer: 0
+  m_Name: DRIVER_SETR
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &500750239
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 500750238}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6645b69652b24545adac46ff8d748cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bdd: {fileID: 688238251}
+  driverIndex: 0
+  driverOb: {fileID: 0}
+  statein: 0
+  statepos:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  moveSpeed: 0
+  isInSession: 0
+  waitDelay: {x: 1, y: 1}
+  rightAnswer: 0
+  wrongAnswer: 0
+  wrongThresh: 0
+  dateNow: 1f00000007000000e5070000
+  currentDriver:
+    isAman: 0
+    wrongIndex: 0
+    simExist: 0
+    stnkExist: 0
+    sim_nama: HARI MONOLO
+    sim_foto: {fileID: 0}
+    sim_ttl: BANDUNG, 16-01-1987
+    sim_bgen: O - PRIA
+    sim_alamat: JL. KADAL RT 14/93 KELURAHAN, KECEMATAN, BANDUNG
+    sim_pekerjaan: MAHASISWA
+    sim_kadaluarsa: 1f00000007000000e5070000
+    stnk_noplat: D 4912 GX
+    stnk_nama: HARI MONOLO
+    stnk_alamat: JL. KADAL RT 14/93 KELURAHAN, KECEMATAN, BANDUNG
+    stnk_modelIndex: 0
+    stnk_jenis: SEPEDA MOTOR
+    stnk_tahunpembuatan: 2017
+    stnk_cc: 00150 CC
+    stnk_rangka: MH1KC82193184
+    stnk_mesin: KC82E123455
+    stnk_warnaIndex: 0
+    stnk_kadaluarsa: 1f00000007000000e5070000
+    motor_model: 0
+    motor_noplat: D 4912 GX
+    motor_warnaIndex: 0
+    motor_mesin: KC82E123455
+    motor_spion: 1
+    motor_lampudepan: 1
+    motor_lampubelakang: 1
+  warna: []
+  motor: []
+  wsimObject: {fileID: 0}
+  wsim_nama: {fileID: 0}
+  wsim_foto: {fileID: 0}
+  wsim_ttl: {fileID: 0}
+  wsim_bgen: {fileID: 0}
+  wsim_alamat: {fileID: 0}
+  wsim_pekerjaan: {fileID: 0}
+  wsim_kadaluarsa: {fileID: 0}
+  wstnkObject: {fileID: 0}
+  wstnk_noplat: {fileID: 0}
+  wstnk_nama: {fileID: 0}
+  wstnk_alamat: {fileID: 0}
+  wstnk_merk: {fileID: 0}
+  wstnk_jenis: {fileID: 0}
+  wstnk_tahunpembuatan: {fileID: 0}
+  wstnk_cc: {fileID: 0}
+  wstnk_rangka: {fileID: 0}
+  wstnk_mesin: {fileID: 0}
+  wstnk_warna: {fileID: 0}
+  wstnk_kadaluarsa: {fileID: 0}
+  wmotor_modelIndex: 0
+  wmotor_noplat: []
+  wmotor_mesin: []
+  wmotor_spion: []
+  wmotor_lampudepan: []
+  wmotor_lampubelakang: []
+--- !u!4 &500750240
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 500750238}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 11.456822, y: -9.328668, z: 28.187069}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 25
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &532141178
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -738,6 +854,79 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!1 &688238250
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 688238252}
+  - component: {fileID: 688238251}
+  m_Layer: 0
+  m_Name: bdatabase
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &688238251
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 688238250}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 356740319ec8c5b45994c5fc414b354c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nameList:
+  - Andi
+  - Bramanto
+  - Chaira
+  - Denanto
+  - Endang
+  - Farhan
+  - Galih
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  fotoList: []
+  kotaList: []
+  golDarahList: []
+  genderList: []
+  pekerjaanList: []
+  platKotaList: []
+  platDaerahList: []
+  alfabet: []
+--- !u!4 &688238252
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 688238250}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 11.456822, y: -9.328668, z: 28.187069}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 24
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &839228510
 PrefabInstance:
   m_ObjectHideFlags: 0

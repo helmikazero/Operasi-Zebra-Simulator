@@ -12,6 +12,10 @@ public class DriverSet : MonoBehaviour
     public GameObject driverOb;
     public int statein;
     public Transform[] statepos = new Transform[3];
+    public float moveSpeed;
+
+    public bool isInSession;
+    public Vector2 waitDelay = new Vector2(1f, 1f);
 
     public int rightAnswer;
     public int wrongAnswer;
@@ -19,6 +23,17 @@ public class DriverSet : MonoBehaviour
     public float wrongThresh;
 
     public int[] dateNow = new int[3] { 31, 7, 2021 };
+
+    public DriverProperties currentDriver;
+
+    [System.Serializable]
+    public class DriverAntriProperties
+    {
+        public bool isRandom;
+        public DriverProperties dedriver;
+    }
+
+    List<DriverAntriProperties> driverQueue = new List<DriverAntriProperties>();
 
 
     [System.Serializable]
@@ -31,8 +46,6 @@ public class DriverSet : MonoBehaviour
     public WarnaMotor[] warna;
 
 
-
-    
 
     [System.Serializable]
     public class ModelMotor
@@ -89,8 +102,8 @@ public class DriverSet : MonoBehaviour
         public bool motor_lampubelakang = true;
     }
 
-    public DriverProperties currentDriver;
-    public DriverProperties[] drivers;
+    
+    /*public DriverProperties[] drivers;*/
 
 
     [Header("WORLD SIM C")]
@@ -134,81 +147,25 @@ public class DriverSet : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-    }
 
-    public void ApplytoWorld()
-    {
-        wsim_nama.text = currentDriver.sim_nama;
-        wsim_foto.sprite = currentDriver.sim_foto;
-        wsim_ttl.text = currentDriver.sim_ttl;
-        wsim_bgen.text = currentDriver.sim_bgen;
-        wsim_alamat.text = currentDriver.sim_alamat;
-        wsim_pekerjaan.text = currentDriver.sim_pekerjaan;
-        wsim_kadaluarsa.text = currentDriver.sim_kadaluarsa[0] + "-" + currentDriver.sim_kadaluarsa[1] + "-" + currentDriver.sim_kadaluarsa[2];
+        driverOb.transform.position = Vector3.MoveTowards(driverOb.transform.position, statepos[statein].position, moveSpeed * Time.deltaTime);
 
-        wstnk_noplat.text = currentDriver.stnk_noplat;
-        wstnk_nama.text= currentDriver.stnk_nama ;
-        wstnk_alamat.text= currentDriver.stnk_alamat;
-        wstnk_merk.text= motor[currentDriver.stnk_modelIndex].modelText;
-        wstnk_jenis.text= currentDriver.stnk_jenis;
-        wstnk_tahunpembuatan.text= currentDriver.stnk_tahunpembuatan.ToString();
-        wstnk_cc.text= currentDriver.stnk_cc;
-        wstnk_rangka.text= currentDriver.stnk_rangka;
-        wstnk_mesin.text= currentDriver.stnk_mesin;
-        wstnk_warna.text = warna[currentDriver.stnk_warnaIndex].warnaText;
-        wstnk_kadaluarsa.text= currentDriver.stnk_kadaluarsa.ToString();
-
-        foreach(ModelMotor mot in motor)
+        if (!isInSession)
         {
-            mot.modelparent.SetActive(false);
+            if(waitDelay.x > 0)
+            {
+                waitDelay.x = waitDelay.x - 1f * Time.deltaTime;
+            }
+            else
+            {
+                isInSession = true;
+                NextDriver();
+            }
         }
 
-        motor[wmotor_modelIndex].modelparent.SetActive(true);
-        wmotor_noplat[wmotor_modelIndex].text = currentDriver.motor_noplat;
-        wmotor_mesin[wmotor_modelIndex].text = currentDriver.motor_mesin;
-        wmotor_spion[wmotor_modelIndex].SetActive(currentDriver.motor_spion);
-        wmotor_lampudepan[wmotor_modelIndex].SetActive(currentDriver.motor_lampudepan);
-        wmotor_lampubelakang[wmotor_modelIndex].SetActive(currentDriver.motor_lampubelakang);
-
-        wsimObject.SetActive(currentDriver.simExist);
-        wstnkObject.SetActive(currentDriver.stnkExist);
     }
 
-    /*public void ApplytoWorld()
-    {
-        wsim_nama.text = currentDriver.sim_nama;
-        wsim_foto.sprite = drivers[driverIndex].sim_foto;
-        wsim_ttl.text = drivers[driverIndex].sim_ttl;
-        wsim_bgen.text = drivers[driverIndex].sim_bgen;
-        wsim_alamat.text = drivers[driverIndex].sim_alamat;
-        wsim_pekerjaan.text = drivers[driverIndex].sim_pekerjaan;
-        wsim_kadaluarsa.text = drivers[driverIndex].sim_kadaluarsa[0] + "-" + drivers[driverIndex].sim_kadaluarsa[1] + "-" + drivers[driverIndex].sim_kadaluarsa[2];
-
-        wstnk_noplat.text = drivers[driverIndex].stnk_noplat;
-        wstnk_nama.text = drivers[driverIndex].stnk_nama;
-        wstnk_alamat.text = drivers[driverIndex].stnk_alamat;
-        wstnk_merk.text = motor[drivers[driverIndex].stnk_modelIndex].modelText;
-        wstnk_jenis.text = drivers[driverIndex].stnk_jenis;
-        wstnk_tahunpembuatan.text = drivers[driverIndex].stnk_tahunpembuatan.ToString();
-        wstnk_cc.text = drivers[driverIndex].stnk_cc;
-        wstnk_rangka.text = drivers[driverIndex].stnk_rangka;
-        wstnk_mesin.text = drivers[driverIndex].stnk_mesin;
-        wstnk_warna.text = warna[drivers[driverIndex].stnk_warnaIndex].warnaText;
-        wstnk_kadaluarsa.text = drivers[driverIndex].stnk_kadaluarsa.ToString();
-
-        foreach (ModelMotor mot in motor)
-        {
-            mot.modelparent.SetActive(false);
-        }
-
-        motor[wmotor_modelIndex].modelparent.SetActive(true);
-        wmotor_noplat[wmotor_modelIndex].text = drivers[driverIndex].motor_noplat;
-        wmotor_mesin[wmotor_modelIndex].text = drivers[driverIndex].motor_mesin;
-        wmotor_spion[wmotor_modelIndex].SetActive(drivers[driverIndex].motor_spion);
-        wmotor_lampudepan[wmotor_modelIndex].SetActive(drivers[driverIndex].motor_lampudepan);
-        wmotor_lampubelakang[wmotor_modelIndex].SetActive(drivers[driverIndex].motor_lampubelakang);
-    }*/
+    
 
 
 
@@ -221,6 +178,45 @@ public class DriverSet : MonoBehaviour
         else
         {
             wrongAnswer++;
+        }
+        isInSession = false;
+        DoneDriver();
+
+        driverIndex++;
+    }
+
+    public void NextDriver()
+    {
+        driverOb.transform.position = statepos[0].position;
+        statein = 1;
+
+        DriverConfigure();
+
+
+    }
+
+    public void DoneDriver()
+    {
+
+        statein = 2;
+    }
+
+    public void DriverConfigure()
+    {
+        if(driverQueue[driverIndex] == null)
+        {
+            DriverAntriProperties thisDriver = null;
+            thisDriver.isRandom = true;
+            thisDriver.dedriver = GenerateNewDriver();
+
+            driverQueue.Add(thisDriver);
+        }
+        else
+        {
+            if (driverQueue[driverIndex].isRandom)
+            {
+                driverQueue[driverIndex].dedriver = GenerateNewDriver();
+            }
         }
 
 
@@ -350,6 +346,44 @@ public class DriverSet : MonoBehaviour
 
 
         return newDriver;
+    }
+
+    public void ApplytoWorld()
+    {
+        wsim_nama.text = currentDriver.sim_nama;
+        wsim_foto.sprite = currentDriver.sim_foto;
+        wsim_ttl.text = currentDriver.sim_ttl;
+        wsim_bgen.text = currentDriver.sim_bgen;
+        wsim_alamat.text = currentDriver.sim_alamat;
+        wsim_pekerjaan.text = currentDriver.sim_pekerjaan;
+        wsim_kadaluarsa.text = currentDriver.sim_kadaluarsa[0] + "-" + currentDriver.sim_kadaluarsa[1] + "-" + currentDriver.sim_kadaluarsa[2];
+
+        wstnk_noplat.text = currentDriver.stnk_noplat;
+        wstnk_nama.text = currentDriver.stnk_nama;
+        wstnk_alamat.text = currentDriver.stnk_alamat;
+        wstnk_merk.text = motor[currentDriver.stnk_modelIndex].modelText;
+        wstnk_jenis.text = currentDriver.stnk_jenis;
+        wstnk_tahunpembuatan.text = currentDriver.stnk_tahunpembuatan.ToString();
+        wstnk_cc.text = currentDriver.stnk_cc;
+        wstnk_rangka.text = currentDriver.stnk_rangka;
+        wstnk_mesin.text = currentDriver.stnk_mesin;
+        wstnk_warna.text = warna[currentDriver.stnk_warnaIndex].warnaText;
+        wstnk_kadaluarsa.text = currentDriver.stnk_kadaluarsa.ToString();
+
+        foreach (ModelMotor mot in motor)
+        {
+            mot.modelparent.SetActive(false);
+        }
+
+        motor[wmotor_modelIndex].modelparent.SetActive(true);
+        wmotor_noplat[wmotor_modelIndex].text = currentDriver.motor_noplat;
+        wmotor_mesin[wmotor_modelIndex].text = currentDriver.motor_mesin;
+        wmotor_spion[wmotor_modelIndex].SetActive(currentDriver.motor_spion);
+        wmotor_lampudepan[wmotor_modelIndex].SetActive(currentDriver.motor_lampudepan);
+        wmotor_lampubelakang[wmotor_modelIndex].SetActive(currentDriver.motor_lampubelakang);
+
+        wsimObject.SetActive(currentDriver.simExist);
+        wstnkObject.SetActive(currentDriver.stnkExist);
     }
 
     /*public void RandomDriver()
