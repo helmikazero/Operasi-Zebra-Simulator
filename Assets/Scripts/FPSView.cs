@@ -57,4 +57,14 @@ public class FPSView : MonoBehaviour
             }
         }
     }
+
+    public void TurnOffMouse()
+    {
+        cursorActive = false;
+    }
+
+    public void TurnONMouse()
+    {
+        cursorActive = true;
+    }
 }

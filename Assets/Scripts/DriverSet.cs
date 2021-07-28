@@ -23,6 +23,7 @@ public class DriverSet : MonoBehaviour
     public float wrongThresh;
 
     public int[] dateNow = new int[3] { 31, 7, 2021 };
+    public Text dateNowText;
 
     public DriverProperties currentDriver;
 
@@ -33,7 +34,7 @@ public class DriverSet : MonoBehaviour
         public DriverProperties dedriver;
     }
 
-    List<DriverAntriProperties> driverQueue = new List<DriverAntriProperties>();
+    public List<DriverAntriProperties> driverQueue = new List<DriverAntriProperties>();
 
 
     [System.Serializable]
@@ -41,7 +42,10 @@ public class DriverSet : MonoBehaviour
     {
         public string warnaText;
         public Material warnaMat;
+        public Color warnaColor;
     }
+
+    public Material motorMaterialOfficial;
 
     public WarnaMotor[] warna;
 
@@ -52,6 +56,15 @@ public class DriverSet : MonoBehaviour
     {
         public string modelText;
         public GameObject modelparent;
+
+        public Text noplat;
+        public Text noplat2;
+        public Text mesin;
+        public GameObject spion;
+        public GameObject lampudepan;
+        public GameObject lampubelakang;
+
+        public MeshRenderer meshren;
     }
 
    
@@ -110,6 +123,7 @@ public class DriverSet : MonoBehaviour
     public GameObject wsimObject;
     public Text wsim_nama;
     public Image wsim_foto;
+    public Image wsim_foto2;
     public Text wsim_ttl;
     public Text wsim_bgen;
     public Text wsim_alamat;
@@ -130,23 +144,28 @@ public class DriverSet : MonoBehaviour
     public Text wstnk_warna;
     public Text wstnk_kadaluarsa;
 
-    [Header("WORLD MOTOR PROPS")]
+    /*[Header("WORLD MOTOR PROPS")]
     public int wmotor_modelIndex;
     public Text[] wmotor_noplat;
     public Text[] wmotor_mesin;
     public GameObject[] wmotor_spion;
     public GameObject[] wmotor_lampudepan;
-    public GameObject[] wmotor_lampubelakang;
+    public GameObject[] wmotor_lampubelakang;*/
+
+    public float testDrive;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        isInSession = true;
+        dateNowText.text = "TANGGAL " + dateNow[0] + " - " + dateNow[1]+" - " + dateNow[2];
+        NextDriver();
     }
 
     // Update is called once per frame
     void Update()
     {
+
 
         driverOb.transform.position = Vector3.MoveTowards(driverOb.transform.position, statepos[statein].position, moveSpeed * Time.deltaTime);
 
@@ -191,7 +210,8 @@ public class DriverSet : MonoBehaviour
         statein = 1;
 
         DriverConfigure();
-
+        currentDriver = driverQueue[driverIndex].dedriver;
+        ApplytoWorld();
 
     }
 
@@ -203,9 +223,9 @@ public class DriverSet : MonoBehaviour
 
     public void DriverConfigure()
     {
-        if(driverQueue[driverIndex] == null)
+        if(driverIndex+1 > driverQueue.Count)
         {
-            DriverAntriProperties thisDriver = null;
+            DriverAntriProperties thisDriver = new DriverAntriProperties();
             thisDriver.isRandom = true;
             thisDriver.dedriver = GenerateNewDriver();
 
@@ -219,24 +239,63 @@ public class DriverSet : MonoBehaviour
             }
         }
 
+        /*if(driverQueue[driverIndex] == null)
+        {
+            DriverAntriProperties thisDriver = null;
+            thisDriver.isRandom = true;
+            thisDriver.dedriver = GenerateNewDriver();
+
+            driverQueue.Add(thisDriver);
+        }
+        else
+        {
+            if (driverQueue[driverIndex].isRandom)
+            {
+                driverQueue[driverIndex].dedriver = GenerateNewDriver();
+            }
+        }*/
+
 
     }
 
 
     public DriverProperties GenerateNewDriver()
     {
-        DriverProperties newDriver = null;
+        DriverProperties newDriver = new DriverProperties();
 
+        newDriver.simExist = true;
         newDriver.sim_nama = bdd.nameList[Random.Range(0, bdd.nameList.Length)] + " " + bdd.nameList[Random.Range(0, bdd.nameList.Length)];
         newDriver.sim_foto = bdd.fotoList[Random.Range(0, bdd.fotoList.Length)];
         newDriver.sim_ttl = bdd.kotaList[Random.Range(0, bdd.kotaList.Length)] + ", " + Random.Range(1, 29) + "-" + Random.Range(1, 13) + "-" + Random.Range(1980, 2000);
         newDriver.sim_bgen = bdd.golDarahList[Random.Range(0, bdd.golDarahList.Length)] + " - " + bdd.genderList[Random.Range(0, bdd.genderList.Length)];
         newDriver.sim_pekerjaan = bdd.pekerjaanList[Random.Range(0, bdd.pekerjaanList.Length)];
+        newDriver.sim_alamat = "JL. " + bdd.namaJalanList[Random.Range(0, bdd.namaJalanList.Length)] + " " + bdd.namaJalanList[Random.Range(0, bdd.namaJalanList.Length)] + " NO." + Random.Range(0, 10) + Random.Range(0, 10) +" "+bdd.kotaList[Random.Range(0,bdd.kotaList.Length)];
         newDriver.sim_kadaluarsa[0] = Random.Range(1, 28);
         newDriver.sim_kadaluarsa[1] = Random.Range(1, 13);
         newDriver.sim_kadaluarsa[2] = Random.Range(dateNow[2], 2023);
+        int sim_kadaluarsagood = Random.Range(0, 3);
+        switch (sim_kadaluarsagood)
+        {
+            case 0:
+                newDriver.sim_kadaluarsa[0] = Random.Range(dateNow[0] + 1, 29);
+                newDriver.sim_kadaluarsa[1] = dateNow[1];
+                newDriver.sim_kadaluarsa[2] = dateNow[2];
+                break;
+            case 1:
+                newDriver.sim_kadaluarsa[0] = Random.Range(1, 29);
+                newDriver.sim_kadaluarsa[1] = Random.Range(dateNow[1] + 1, 13);
+                newDriver.sim_kadaluarsa[2] = dateNow[2];
+                break;
+            case 2:
+                newDriver.sim_kadaluarsa[0] = Random.Range(1, 29);
+                newDriver.sim_kadaluarsa[1] = Random.Range(1, 13);
+                newDriver.sim_kadaluarsa[2] = Random.Range(dateNow[2] + 1, 2026);
+                break;
+        }
 
+        newDriver.stnkExist = true;
         newDriver.stnk_noplat = bdd.platKotaList[Random.Range(0, bdd.platKotaList.Length)] + " " + Random.Range(0, 10) + Random.Range(0, 10) + Random.Range(0, 10) + Random.Range(0, 10) + " " + bdd.platDaerahList[Random.Range(0, bdd.platDaerahList.Length)];
+        newDriver.stnk_nama = newDriver.sim_nama;
         newDriver.stnk_alamat = newDriver.sim_alamat;
         newDriver.stnk_modelIndex = Random.Range(0, motor.Length);
         newDriver.stnk_jenis = "SEPEDA MOTOR";
@@ -284,6 +343,7 @@ public class DriverSet : MonoBehaviour
                 newDriver.sim_nama = bdd.nameList[Random.Range(0, bdd.nameList.Length)] + " " + bdd.nameList[Random.Range(0, bdd.nameList.Length)];
                 newDriver.sim_foto = bdd.fotoList[Random.Range(0, bdd.fotoList.Length)];
                 newDriver.sim_ttl = bdd.kotaList[Random.Range(0, bdd.kotaList.Length)] + ", " + Random.Range(1, 29) + "-" + Random.Range(1, 13) + "-" + Random.Range(1980, 2000);
+                newDriver.sim_alamat = "JL. " + bdd.namaJalanList[Random.Range(0, bdd.namaJalanList.Length)] + " " + bdd.namaJalanList[Random.Range(0, bdd.namaJalanList.Length)] + " NO." + Random.Range(0, 10) + Random.Range(0, 10) + " " + bdd.kotaList[Random.Range(0, bdd.kotaList.Length)];
                 newDriver.sim_bgen = bdd.golDarahList[Random.Range(0, bdd.golDarahList.Length)] + " - " + bdd.genderList[Random.Range(0, bdd.genderList.Length)];
                 newDriver.sim_pekerjaan = bdd.pekerjaanList[Random.Range(0, bdd.pekerjaanList.Length)];
                 newDriver.sim_kadaluarsa[0] = Random.Range(1, 28);
@@ -294,7 +354,7 @@ public class DriverSet : MonoBehaviour
         else
         {
             newDriver.isAman = false;
-            newDriver.wrongIndex = Random.Range(0, 7);
+            newDriver.wrongIndex = Random.Range(0, 8);
 
             switch (newDriver.wrongIndex)
             {
@@ -339,6 +399,27 @@ public class DriverSet : MonoBehaviour
                     newDriver.motor_warnaIndex = newDriver.stnk_warnaIndex;
                     newDriver.motor_mesin = newDriver.stnk_mesin;
                     break;
+                case 7:
+                    switch (sim_kadaluarsagood)
+                    {
+                        case 0:
+                            newDriver.sim_kadaluarsa[0] = Random.Range(1, dateNow[0] - 1);
+                            newDriver.sim_kadaluarsa[1] = dateNow[1];
+                            newDriver.sim_kadaluarsa[2] = dateNow[2];
+                            break;
+                        case 1:
+                            newDriver.sim_kadaluarsa[0] = Random.Range(1, 29);
+                            newDriver.sim_kadaluarsa[1] = Random.Range(1, dateNow[1] - 1);
+                            newDriver.sim_kadaluarsa[2] = dateNow[2];
+                            break;
+                        case 2:
+                            newDriver.sim_kadaluarsa[0] = Random.Range(1, 29);
+                            newDriver.sim_kadaluarsa[1] = Random.Range(1, 13);
+                            newDriver.sim_kadaluarsa[2] = Random.Range(2010, dateNow[2] - 1);
+                            break;
+                    }
+                    break;
+
             }
         }
 
@@ -348,12 +429,13 @@ public class DriverSet : MonoBehaviour
 
     public void ApplytoWorld()
     {
-        wsim_nama.text = currentDriver.sim_nama;
+        wsim_nama.text = "1. "+currentDriver.sim_nama;
         wsim_foto.sprite = currentDriver.sim_foto;
-        wsim_ttl.text = currentDriver.sim_ttl;
-        wsim_bgen.text = currentDriver.sim_bgen;
-        wsim_alamat.text = currentDriver.sim_alamat;
-        wsim_pekerjaan.text = currentDriver.sim_pekerjaan;
+        wsim_foto2.sprite = currentDriver.sim_foto;
+        wsim_ttl.text = "2. " + currentDriver.sim_ttl;
+        wsim_bgen.text = "3. " + currentDriver.sim_bgen;
+        wsim_alamat.text = "4. " + currentDriver.sim_alamat;
+        wsim_pekerjaan.text = "5. " + currentDriver.sim_pekerjaan;
         wsim_kadaluarsa.text = currentDriver.sim_kadaluarsa[0] + "-" + currentDriver.sim_kadaluarsa[1] + "-" + currentDriver.sim_kadaluarsa[2];
 
         wstnk_noplat.text = currentDriver.stnk_noplat;
@@ -366,19 +448,36 @@ public class DriverSet : MonoBehaviour
         wstnk_rangka.text = currentDriver.stnk_rangka;
         wstnk_mesin.text = currentDriver.stnk_mesin;
         wstnk_warna.text = warna[currentDriver.stnk_warnaIndex].warnaText;
-        wstnk_kadaluarsa.text = currentDriver.stnk_kadaluarsa.ToString();
+        wstnk_kadaluarsa.text = currentDriver.stnk_kadaluarsa[0]+"-"+ currentDriver.stnk_kadaluarsa[1]+"-" + currentDriver.stnk_kadaluarsa[2];
 
-        foreach (ModelMotor mot in motor)
+        /*foreach (ModelMotor mot in motor)
         {
             mot.modelparent.SetActive(false);
+        }*/
+
+
+
+        /*motor[currentDriver.motor_model].modelparent.SetActive(true);*/
+        /*wmotor_noplat[currentDriver.motor_model].text = currentDriver.motor_noplat;
+        wmotor_mesin[currentDriver.motor_model].text = currentDriver.motor_mesin;
+        wmotor_spion[currentDriver.motor_model].SetActive(currentDriver.motor_spion);
+        wmotor_lampudepan[currentDriver.motor_model].SetActive(currentDriver.motor_lampudepan);
+        wmotor_lampubelakang[currentDriver.motor_model].SetActive(currentDriver.motor_lampubelakang);*/
+
+        for (int i = 0; i < motor.Length; i++)
+        {
+            motor[i].modelparent.SetActive(i == currentDriver.motor_model);
         }
 
-        motor[wmotor_modelIndex].modelparent.SetActive(true);
-        wmotor_noplat[wmotor_modelIndex].text = currentDriver.motor_noplat;
-        wmotor_mesin[wmotor_modelIndex].text = currentDriver.motor_mesin;
-        wmotor_spion[wmotor_modelIndex].SetActive(currentDriver.motor_spion);
-        wmotor_lampudepan[wmotor_modelIndex].SetActive(currentDriver.motor_lampudepan);
-        wmotor_lampubelakang[wmotor_modelIndex].SetActive(currentDriver.motor_lampubelakang);
+        motor[currentDriver.motor_model].noplat.text = currentDriver.motor_noplat;
+        motor[currentDriver.motor_model].noplat2.text = currentDriver.motor_noplat;
+        motor[currentDriver.motor_model].mesin.text = currentDriver.motor_mesin;
+        motor[currentDriver.motor_model].spion.SetActive(currentDriver.motor_spion);
+        motor[currentDriver.motor_model].lampudepan.SetActive(currentDriver.motor_lampudepan);
+        motor[currentDriver.motor_model].lampubelakang.SetActive(currentDriver.motor_lampubelakang);
+        /*motor[currentDriver.motor_model].meshren.materials[5] = warna[currentDriver.motor_warnaIndex].warnaMat;*/
+        motorMaterialOfficial.color = warna[currentDriver.motor_warnaIndex].warnaColor;
+
 
         wsimObject.SetActive(currentDriver.simExist);
         wstnkObject.SetActive(currentDriver.stnkExist);

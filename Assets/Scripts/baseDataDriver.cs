@@ -8,6 +8,8 @@ public class baseDataDriver : MonoBehaviour
 
     public Sprite[] fotoList;
 
+    public string[] namaJalanList;
+
     public string[] kotaList;
 
     public string[] golDarahList;
