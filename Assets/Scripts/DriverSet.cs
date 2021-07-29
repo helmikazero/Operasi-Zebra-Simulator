@@ -5,7 +5,11 @@ using UnityEngine.UI;
 
 public class DriverSet : MonoBehaviour
 {
+    public DayManager dman;
     public baseDataDriver bdd;
+
+    public AudioSource benarsfx;
+    public AudioSource salahsfx;
 
     public int driverIndex;
 
@@ -14,6 +18,7 @@ public class DriverSet : MonoBehaviour
     public Transform[] statepos = new Transform[3];
     public float moveSpeed;
 
+    public bool isMatchStarted;
     public bool isInSession;
     public Vector2 waitDelay = new Vector2(1f, 1f);
 
@@ -157,9 +162,9 @@ public class DriverSet : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        isInSession = true;
+        /*isInSession = true;
         dateNowText.text = "TANGGAL " + dateNow[0] + " - " + dateNow[1]+" - " + dateNow[2];
-        NextDriver();
+        NextDriver();*/
     }
 
     // Update is called once per frame
@@ -169,43 +174,63 @@ public class DriverSet : MonoBehaviour
 
         driverOb.transform.position = Vector3.MoveTowards(driverOb.transform.position, statepos[statein].position, moveSpeed * Time.deltaTime);
 
-        if (!isInSession)
+        if (isMatchStarted)
         {
-            if(waitDelay.x > 0)
+            if (!isInSession)
             {
-                waitDelay.x = waitDelay.x - 1f * Time.deltaTime;
-            }
-            else
-            {
-                isInSession = true;
-                NextDriver();
+                if (waitDelay.x > 0)
+                {
+                    waitDelay.x = waitDelay.x - 1f * Time.deltaTime;
+                }
+                else
+                {
+                    waitDelay.x = waitDelay.y;
+                    isInSession = true;
+                    NextDriver();
+                }
             }
         }
 
     }
 
     
-
+    public void MATCH_START()
+    {
+        isMatchStarted = true;
+        isInSession = true;
+        dateNowText.text = "TANGGAL " + dateNow[0] + " - " + dateNow[1] + " - " + dateNow[2];
+        NextDriver();
+    }
 
 
     public void PlayerAnswer(bool answerBool)
     {
-        if(answerBool == currentDriver.isAman)
+        if (isInSession)
         {
-            rightAnswer++;
-        }
-        else
-        {
-            wrongAnswer++;
-        }
-        isInSession = false;
-        DoneDriver();
+            if (answerBool == currentDriver.isAman)
+            {
+                rightAnswer++;
+                dman.benarAmount++;
+                benarsfx.Play();
+            }
+            else
+            {
+                wrongAnswer++;
+                dman.salahAmount++;
+                salahsfx.Play();
+            }
+            isInSession = false;
+            DoneDriver();
 
-        driverIndex++;
+            driverIndex++;
+        }
+        
     }
 
     public void NextDriver()
     {
+
+        Debug.Log("SAYA NEXT DRIVER DIPANGGIL");
         driverOb.transform.position = statepos[0].position;
         statein = 1;
 
