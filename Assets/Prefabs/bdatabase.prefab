@@ -70,8 +70,8 @@ MonoBehaviour:
   - RIJALU
   - RIJALU
   fotoList:
-  - {fileID: 21300000, guid: 85e89cc1830a4cd44b28897912fa621f, type: 3}
-  - {fileID: 21300000, guid: 85e89cc1830a4cd44b28897912fa621f, type: 3}
+  - {fileID: 21300000, guid: 72ef692df6e145d4c91eb69d69256c97, type: 3}
+  - {fileID: 21300000, guid: 72ef692df6e145d4c91eb69d69256c97, type: 3}
   namaJalanList:
   - ANGGUR
   - RAYA

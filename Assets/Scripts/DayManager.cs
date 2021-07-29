@@ -163,8 +163,18 @@ public class DayManager : MonoBehaviour
             {
                 outroText[4].text = "OPERASI ZEBRA KALI INI KURANG OPTIMAL";
                 outroText[5].text = "PENANGANAN ANDA BELUM SIGAP";
-                outroText[6].text = "ANDA DI SANKSI RP25.000, TETAPI MASIH DAPAT BERTUGAS ESOK HARI";
-                pp.moneyAmount -= 250000;
+
+                pp.moneyAmount -= 25000;
+
+                if(pp.moneyAmount < 0)
+                {
+                    outroText[6].text = "ANDA TIDAK MAMPU MEMBAYAR SANKSI, SEKARANG ANDA DIBEBAS TUGASKAN";
+                    pp.PLAYER_RESET();
+                }
+                else
+                {
+                    outroText[6].text = "ANDA DI SANKSI RP25.000, TETAPI MASIH DAPAT BERTUGAS ESOK HARI";
+                }
             }
             
         }
@@ -174,9 +184,17 @@ public class DayManager : MonoBehaviour
             {
                 case 1:
                     outroText[4].text = "ANDA KEHABISAN ENERGI HINGGA PINGSAN";
-                    outroText[5].text = "ANDA DIBAWA KE RUMAH SAKIT DAN PERLU MEMBAYAR BIAYA PERAWATAN";
-                    outroText[6].text = "DAN DIBEBAS TUGASKAN UNTUK SEKARANG";
-                    pp.PLAYER_RESET();
+                    outroText[5].text = "ANDA DIBAWA KE RUMAH SAKIT DAN PERLU MEMBAYAR BIAYA PERAWATAN RP30.000";
+                    pp.moneyAmount -= 30000;
+                    if(pp.moneyAmount > 0)
+                    {
+                        outroText[6].text = "UANG ANDA CUKUP DAN BISA BERTUGAS KEMBALI ESOK HARI";
+                    }
+                    else
+                    {
+                        outroText[6].text = "ANDA TIDAK MAMPU MEMBAYAR DAN DIBEBAS TUGASKAN";
+                        pp.PLAYER_RESET();
+                    }
                     break;
                 case 2:
                     outroText[4].text = "ANDA BOLOS DARI TUGAS HARI INI";

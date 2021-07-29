@@ -14,6 +14,14 @@ public class playerProfile : MonoBehaviour
 
     public int foodRation;
 
+    public float mouseSensitivityMultiplier = 30f;
+
+
+    
+
+
+    public 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -25,7 +33,7 @@ public class playerProfile : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(dateNow[0] > 28)
+        if (dateNow[0] > 28)
         {
             dateNow[0] = 1;
             dateNow[1]++;
@@ -36,6 +44,7 @@ public class playerProfile : MonoBehaviour
             dateNow[1] = 1;
             dateNow[2]++;
         }
+
     }
 
     public void PLAYER_RESET()
@@ -45,4 +54,6 @@ public class playerProfile : MonoBehaviour
 
         moneyAmount = 10000;
     }
+
+    
 }

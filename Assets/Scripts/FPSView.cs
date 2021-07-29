@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class FPSView : MonoBehaviour
 {
-    public float mouseSensitivity = 100f;
+
+    public playerProfile pp;
+    public float mouseSensitivity = 300f;
+
     public Transform playerBody;
     public Transform playerCamObject;
     float xRotation = 0f;
@@ -16,7 +19,8 @@ public class FPSView : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        pp = GameObject.Find("PLAYER_PROFILE").GetComponent<playerProfile>();
+        sensMultiplier = pp.mouseSensitivityMultiplier/100f;
     }
 
     // Update is called once per frame
