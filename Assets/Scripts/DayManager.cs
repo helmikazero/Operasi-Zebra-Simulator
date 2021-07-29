@@ -75,7 +75,7 @@ public class DayManager : MonoBehaviour
             }
             else
             {
-                cinemPanel.SetActive(false);
+                /*cinemPanel.SetActive(false);*/
                 dset.MATCH_START();
                 inGamePhase = 1;
             }
@@ -136,7 +136,7 @@ public class DayManager : MonoBehaviour
     public void EndGame(int dayEndResult)
     {
 
-        cinemPanel.SetActive(true);
+        /*cinemPanel.SetActive(true);*/
         pp.dateNow[0]++;
         pp.daySurvived++;
 
